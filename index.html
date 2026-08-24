@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SlotPixBR - Diversão Instantânea</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Changa:wght@400;700;800&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Changa', 'sans-serif'], display: ['Orbitron', 'sans-serif'] },
+                    colors: { slot: { dark: '#0a0014', purple: '#6b21a8', pink: '#db2777', neon: '#00ffcc', gold: '#fbbf24' } }
+                }
+            }
+        }
+    </script>
+    <style>
+        .casino-bg { background: radial-gradient(circle at 50% 50%, #2e0854 0%, #0a0014 100%); }
+        .neon-text { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #00ffcc, 0 0 40px #00ffcc; }
+        .neon-box { box-shadow: 0 0 10px #db2777, inset 0 0 10px #db2777; border: 2px solid #db2777; }
+        .float-anim { animation: float 3s ease-in-out infinite; }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
+        
+        .modal { opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+        .modal.active { opacity: 1; pointer-events: auto; }
+        .modal-content { transform: scale(0.8) rotateX(20deg); opacity: 0; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .modal.active .modal-content { transform: scale(1) rotateX(0); opacity: 1; }
+    </style>
+</head>
+<body class="casino-bg text-white antialiased selection:bg-slot-neon selection:text-black min-h-screen">
+
+    <nav class="fixed w-full z-50 bg-slot-dark/80 backdrop-blur-md border-b border-slot-purple/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex justify-between items-center">
+            <div class="font-display font-black text-2xl tracking-wider text-slot-gold">
+                SLOT<span class="text-white">PIX</span><span class="text-slot-neon">BR</span>
+            </div>
+            
+            <div class="flex gap-2 sm:gap-4">
+                <button onclick="document.getElementById('modal-login').classList.add('active')" class="text-sm font-bold uppercase hover:text-slot-neon transition px-3 py-2">Entrar</button>
+                <button onclick="document.getElementById('modal-cad').classList.add('active')" class="bg-gradient-to-r from-slot-pink to-slot-purple text-white text-sm font-bold uppercase px-4 sm:px-6 py-2 rounded shadow-[0_0_15px_rgba(219,39,119,0.5)] hover:shadow-[0_0_25px_rgba(219,39,119,0.8)] transition">Cadastrar</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sec 1: Hero -->
+    <section class="pt-24 pb-12 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8 items-center min-h-[70vh]">
+            <div data-aos="fade-right">
+                <div class="inline-block bg-slot-gold text-black font-bold uppercase tracking-widest text-xs px-3 py-1 rounded mb-6 animate-pulse">Bônus de 100% no 1º Depósito</div>
+                <h1 class="font-display text-5xl md:text-7xl font-black mb-6 leading-tight">
+                    Gire. <br><span class="neon-text">Ganhe.</span> <br>Saque via Pix.
+                </h1>
+                <p class="text-gray-300 text-lg mb-10 max-w-md font-sans">
+                    A plataforma de entretenimento mais rápida do Brasil. Saques instantâneos diretamente na sua conta, 24 horas por dia.
+                </p>
+                <button onclick="document.getElementById('modal-cad').classList.add('active')" class="bg-slot-neon text-black font-display font-bold uppercase tracking-widest text-xl px-10 py-5 rounded hover:bg-white transition shadow-[0_0_20px_rgba(0,255,204,0.6)] hover:scale-105 transform">
+                    Jogar Agora
+                </button>
+            </div>
+            
+            <div class="relative flex justify-center float-anim" data-aos="zoom-in" data-aos-delay="200">
+                <div class="absolute inset-0 bg-slot-pink/20 blur-[100px] rounded-full"></div>
+                <img src="https://images.unsplash.com/photo-1596838132731-3301c3fd4317?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Slots" class="w-full max-w-sm rounded-2xl neon-box relative z-10" />
+                <div class="absolute -bottom-6 -right-6 bg-slot-dark border-2 border-slot-gold p-4 rounded-xl z-20 shadow-2xl">
+                    <div class="text-slot-neon font-display font-bold">Saque Rápido</div>
+                    <div class="text-white text-sm">Pix em 3 segundos ⚡</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sec 2: Jogos Populares -->
+    <section class="py-16 bg-black/50 border-y border-slot-purple/30">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="font-display text-3xl md:text-4xl font-bold mb-10 flex items-center gap-3">
+                <span class="text-slot-gold">🔥</span> Em Alta
+            </h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                <!-- Jogo 1 -->
+                <div class="relative group rounded-xl overflow-hidden cursor-pointer neon-box border-opacity-50 hover:border-opacity-100 transition" onclick="document.getElementById('modal-cad').classList.add('active')" data-aos="fade-up">
+                    <img src="https://images.unsplash.com/photo-1606167668584-78701c57f13d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-48 object-cover group-hover:scale-110 transition duration-500" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent flex flex-col justify-end p-4">
+                        <h3 class="font-display font-bold text-lg text-slot-gold">Tiger Gold</h3>
+                        <p class="text-xs text-gray-300">RTP 96.5%</p>
+                    </div>
+                </div>
+                <!-- Jogo 2 -->
+                <div class="relative group rounded-xl overflow-hidden cursor-pointer border-2 border-slot-neon/50 hover:border-slot-neon transition shadow-[0_0_10px_rgba(0,255,204,0.2)] hover:shadow-[0_0_15px_rgba(0,255,204,0.6)]" onclick="document.getElementById('modal-cad').classList.add('active')" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-48 object-cover group-hover:scale-110 transition duration-500" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent flex flex-col justify-end p-4">
+                        <h3 class="font-display font-bold text-lg text-slot-neon">Neon Fruits</h3>
+                        <p class="text-xs text-gray-300">Jackpot Ativo</p>
+                    </div>
+                </div>
+                <!-- Jogo 3 -->
+                <div class="relative group rounded-xl overflow-hidden cursor-pointer border-2 border-slot-purple/50 hover:border-slot-purple transition" onclick="document.getElementById('modal-cad').classList.add('active')" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1595777755836-3a7cb17db238?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-48 object-cover group-hover:scale-110 transition duration-500" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent flex flex-col justify-end p-4">
+                        <h3 class="font-display font-bold text-lg text-white">Egyptian Secret</h3>
+                        <p class="text-xs text-gray-300">Rodadas Grátis</p>
+                    </div>
+                </div>
+                <!-- Jogo 4 -->
+                <div class="relative group rounded-xl overflow-hidden cursor-pointer border-2 border-slot-gold/50 hover:border-slot-gold transition" onclick="document.getElementById('modal-cad').classList.add('active')" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1623910271018-8f5539ab4261?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-48 object-cover group-hover:scale-110 transition duration-500" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent flex flex-col justify-end p-4">
+                        <h3 class="font-display font-bold text-lg text-white">Mega Crash</h3>
+                        <p class="text-xs text-gray-300">Multiplicador X100</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sec 3: Vantagens -->
+    <section class="py-20 max-w-7xl mx-auto px-6">
+        <div class="grid md:grid-cols-3 gap-8 text-center">
+            <div class="bg-slot-dark border border-slot-purple/30 p-8 rounded-2xl hover:bg-slot-purple/10 transition" data-aos="zoom-in">
+                <div class="text-5xl mb-4">🚀</div>
+                <h3 class="font-display text-xl font-bold mb-2">Saque Instantâneo</h3>
+                <p class="text-gray-400 text-sm">Integração nativa com PIX. Ganhou, sacou, tá na conta. Sem enrolação.</p>
+            </div>
+            <div class="bg-slot-dark border border-slot-purple/30 p-8 rounded-2xl hover:bg-slot-purple/10 transition" data-aos="zoom-in" data-aos-delay="100">
+                <div class="text-5xl mb-4">🎁</div>
+                <h3 class="font-display text-xl font-bold mb-2">Bônus Diários</h3>
+                <p class="text-gray-400 text-sm">Gire a roleta da sorte todos os dias para ganhar saldo extra e rodadas grátis.</p>
+            </div>
+            <div class="bg-slot-dark border border-slot-purple/30 p-8 rounded-2xl hover:bg-slot-purple/10 transition" data-aos="zoom-in" data-aos-delay="200">
+                <div class="text-5xl mb-4">🔒</div>
+                <h3 class="font-display text-xl font-bold mb-2">100% Seguro</h3>
+                <p class="text-gray-400 text-sm">Plataforma criptografada de ponta a ponta. Sistema RNG certificado.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#05000a] pt-16 pb-8 border-t-4 border-slot-pink">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10">
+            <div class="text-center md:text-left">
+                <div class="font-display font-black text-3xl tracking-wider text-slot-gold mb-4">
+                    SLOT<span class="text-white">PIX</span><span class="text-slot-neon">BR</span>
+                </div>
+                <p class="text-gray-500 text-xs max-w-xs mb-2">Jogue com responsabilidade. Proibido para menores de 18 anos.</p>
+                <p class="text-gray-400 font-bold text-sm">Suporte: <a href="mailto:contato@slotpixbr.com.br" class="text-slot-neon hover:underline">contato@slotpixbr.com.br</a></p>
+            </div>
+            
+            <div class="flex flex-col items-center">
+                <span class="text-[10px] text-gray-500 font-display uppercase tracking-widest mb-3">Auditoria Verificada</span>
+                <a href="https://www.reclameaqui.com.br/empresa/slotpix/sobre/" target="_blank" class="block hover:scale-105 transition bg-white/5 p-2 rounded-lg border border-white/10">
+                    <img src="selo-ra.png" alt="Selo Reclame Aqui" class="h-14 object-contain filter drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]" />
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="modal-login" class="modal fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm" onclick="document.getElementById('modal-login').classList.remove('active')"></div>
+        <div class="modal-content bg-slot-dark border-2 border-slot-neon p-8 w-full max-w-sm rounded-2xl relative z-10 shadow-[0_0_30px_rgba(0,255,204,0.3)]">
+            <button onclick="document.getElementById('modal-login').classList.remove('active')" class="absolute top-4 right-4 text-gray-500 hover:text-white text-2xl">&times;</button>
+            <h3 class="font-display text-2xl font-bold text-center text-white mb-6 uppercase tracking-wider">Login</h3>
+            
+            <form onsubmit="event.preventDefault(); alert('Login efetuado! Boa sorte.'); document.getElementById('modal-login').classList.remove('active');">
+                <input type="text" placeholder="CPF ou E-mail" required class="w-full bg-[#130026] border border-slot-purple p-4 rounded mb-4 text-white outline-none focus:border-slot-neon transition font-bold">
+                <input type="password" placeholder="Senha" required class="w-full bg-[#130026] border border-slot-purple p-4 rounded mb-8 text-white outline-none focus:border-slot-neon transition font-bold">
+                <button type="submit" class="w-full bg-slot-neon text-black font-display font-bold uppercase text-lg py-4 rounded hover:bg-white transition shadow-[0_0_15px_rgba(0,255,204,0.5)]">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-cad" class="modal fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm" onclick="document.getElementById('modal-cad').classList.remove('active')"></div>
+        <div class="modal-content bg-slot-dark border-2 border-slot-pink p-8 w-full max-w-md rounded-2xl relative z-10 shadow-[0_0_30px_rgba(219,39,119,0.3)]">
+            <button onclick="document.getElementById('modal-cad').classList.remove('active')" class="absolute top-4 right-4 text-gray-500 hover:text-white text-2xl">&times;</button>
+            <h3 class="font-display text-2xl font-bold text-center text-white mb-2 uppercase tracking-wider">Criar Conta</h3>
+            <p class="text-center text-slot-gold text-sm font-bold mb-6">Ganhe 100% no 1º Depósito via PIX</p>
+            
+            <form onsubmit="event.preventDefault(); alert('Cadastro Concluído! Faça seu depósito e comece a jogar.'); document.getElementById('modal-cad').classList.remove('active');">
+                <input type="text" placeholder="CPF (Apenas números)" required class="w-full bg-[#130026] border border-slot-purple p-3 rounded mb-3 text-white outline-none focus:border-slot-pink transition font-bold">
+                <input type="email" placeholder="E-mail" required class="w-full bg-[#130026] border border-slot-purple p-3 rounded mb-3 text-white outline-none focus:border-slot-pink transition font-bold">
+                <input type="tel" placeholder="Celular" required class="w-full bg-[#130026] border border-slot-purple p-3 rounded mb-3 text-white outline-none focus:border-slot-pink transition font-bold">
+                <div class="grid grid-cols-2 gap-3 mb-8">
+                    <input type="password" placeholder="Senha" required class="w-full bg-[#130026] border border-slot-purple p-3 rounded text-white outline-none focus:border-slot-pink transition font-bold">
+                    <input type="password" placeholder="Confirmar" required class="w-full bg-[#130026] border border-slot-purple p-3 rounded text-white outline-none focus:border-slot-pink transition font-bold">
+                </div>
+                <button type="submit" class="w-full bg-gradient-to-r from-slot-pink to-slot-purple text-white font-display font-bold uppercase text-lg py-4 rounded shadow-[0_0_15px_rgba(219,39,119,0.5)] hover:shadow-[0_0_25px_rgba(219,39,119,0.9)] transition">Cadastrar e Jogar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init({ once: true, offset: 50 });</script>
+</body>
+</html>
